@@ -1,0 +1,59 @@
+.no-auth{
+  margin-top:25px;
+    display: flex;
+    flex-direction: column;
+    background-color: #c90505;
+    text-align: center;
+    height: 50vh;
+    width: 14vw;
+    border-width: 10px;
+    border-radius: 25px;
+    margin:15px;
+    padding: 1%;
+}
+
+.auth-form{
+/* border: solid #000000; */
+display: flex;
+flex-direction: column;
+
+}
+
+.no-auth input[type='text'],input[type='password']{
+
+/* height: 25px;
+width: 230px; */
+
+
+}
+
+
+.no-auth button{
+height: 30px;
+width: 100;
+border-radius: 25px;
+margin:10px 5px 0px 5px ;
+}
+
+@media (max-width:1100px) {
+  .no-auth{
+    margin-top:7px;
+      flex-direction: column;
+      text-align: center;
+      height: 30vh;
+      width: 92vw;
+      border-width: 10px;
+      border-radius: 25px;
+      margin:7px;
+      padding: 7%;
+  }
+
+  .no-auth input[type='text'],input[type='password']{
+  
+    height: 5vh;
+    width: 80vw;
+  
+   
+  }
+
+}

@@ -1,17 +1,15 @@
-
-import Auth from '../Auth/Auth'
-import TeamSummary from '../TeamSummary/TeamSummary'
+import Auth from './Auth'
 import PokemonTeam from './PokemonTeam'
-import './Home.css'
 
-export default Home =()=> {
+
+export default function Home (){
  
 
         return (
-            <div className='home'>
-                {/* <Auth /> */}
+            <div className='Home'>
+                <Auth />
                 <div>
-                   
+                   <p>yeah</p>
                     <PokemonTeam />
                 </div>
             </div>

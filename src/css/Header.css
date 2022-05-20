@@ -1,0 +1,47 @@
+header{
+  height:13vh;
+  width:100vw;
+  border-width: 10px;
+  display: inline-block;
+  background-color:#3b4cca;
+  color: #cfe1e4f1;
+  text-shadow: 1px 0px black;
+  text-align: center;
+  vertical-align: middle;
+  font-size: 30px;
+  font-family: 'Bowlby One SC', cursive;
+}
+
+.title{
+margin: -25px 0 0px 0 ;
+}
+
+.pkmball{
+  height: 10vh;
+  width: 10vh;
+  margin: 30px 0 0 0;
+}
+
+
+@media (max-width: 900px) {
+  header{
+    height:13vh;
+    width:100vw;
+    border-width: 10px;
+    text-align: center;
+    vertical-align: middle;
+    font-size: 14px;
+    font-family: 'Bowlby One SC', cursive;
+  }
+
+  .pkmball{
+    height: 5vh;
+    width: 5vh;
+    margin:  0 0 0;
+  }
+
+  .title{
+    margin: 0px 0 0px 0 ;
+  }
+
+}  

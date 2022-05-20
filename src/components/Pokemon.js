@@ -2,18 +2,18 @@ import React, { useState } from "react";
 import axios from "axios";
 import "./Pokemon.css";
 import { connect } from "react-redux";
-import { setPokemon } from "../../redux/pokemonReducer";
+import { setPokemon } from "../redux/pokemonReducer"
 
 export default Pokemon=()=> {
  const [pkmName,setpkmName]= useState('')
- const [pkmHp, setpkmHp] = useState(null)
- const [pkmAtk, setpkmAtk] = useState(null)
- const [pkmDef, setpkmDef] = useState(null)
- const [pkmSpecAtk, setpkmSpecAtk] = useState(null)
- const [pkmSpecDef, setpkmSpecDef] = useState(null)
- const [pkmSpeed,setpkmSpeed] =useState(null)
  const [pkmSprite, setpkmSprite] = useState('')
- const [mountedName, setmountedName] = useState('second')
+//  const [pkmHp, setpkmHp] = useState(null)
+//  const [pkmAtk, setpkmAtk] = useState(null)
+//  const [pkmDef, setpkmDef] = useState(null)
+//  const [pkmSpecAtk, setpkmSpecAtk] = useState(null)
+//  const [pkmSpecDef, setpkmSpecDef] = useState(null)
+//  const [pkmSpeed,setpkmSpeed] =useState(null)
+//  const [mountedName, setmountedName] = useState('second')
 
    
 
@@ -100,8 +100,13 @@ export default Pokemon=()=> {
       </div>
     );
 
-// function mapStateToProps(reduxState) {
-//   return reduxState;
+    // function mapStateToProps(reduxState) {
+    //   return reduxState;
+    // }
+  
+    
 }
 
-// export default connect(mapStateToProps, { setPokemon })(Pokemon);
+
+// export default connect(mapStateToProps,{setPokemon})(Pokemon)
+export default Pokemon

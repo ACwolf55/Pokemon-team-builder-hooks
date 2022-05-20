@@ -1,0 +1,16 @@
+.all-pkm-teams{
+    margin: 100px 0px 0px 0px 0px;
+    text-align: center;
+    
+    
+ 
+
+
+}
+
+.team-display{
+    display: flex;
+    flex-direction: column;
+
+}
+

@@ -1,0 +1,117 @@
+.pokemon-team-box{
+  display: flex;
+  flex-direction: row;
+  background-color: #f37a7a;
+  border-radius: 25px;
+  width: 83vw;
+  height: 77vh;
+  padding: 0;
+  margin: 70px 0px 0px 0px;
+  padding: 0;
+
+}
+
+.pokemon-team{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  width: 80%;
+  height: 97%;
+  margin:0px 0px 0px 0px;
+  padding: 45px 15px 0px 15px;
+  
+}
+
+.pkm-card{
+  display: flex;
+  flex-direction: column;
+  background-color: #d13b3b;
+  height:34vh;
+  width: 20vw;
+  border: solid #000000;
+  border-width: 3px;
+  border-radius: 25px;
+  text-align: left;
+  color: rgb(255, 255, 255);
+  padding: 20px 0px 0px 20px ;
+  font-size: 11px;
+  margin: 5px 2px 5px 5px;
+
+  /* #3b4cca  <-blue from header   */
+
+
+}
+
+  .save-team-box{
+    display: flex;
+    flex-direction: column;
+    background-color: #d13b3b;
+    height:45vh;
+    width: 12vw;
+    border: solid #000000;
+    border-width: 3px;
+    border-radius: 25px;
+    padding: 2%;
+    margin: 50px 0px 0px 25px;
+
+  }
+
+ @media (max-width: 1100px){
+  .pokemon-team-box{
+    flex-direction: column;
+    border-radius: 25px;
+    width: 100vw;
+    height: 160vh;
+    padding: 0;
+    margin: 5px 0px 0px 0px;
+    padding: 0;
+  
+  }
+  
+  .pokemon-team{
+    height: 150vh;
+    width: 100vw;
+    flex-direction: row;
+    flex-wrap: wrap;
+    margin: 15px 1px 0 0;
+    padding: 0px 0px 2px 2px;
+    
+  }
+  
+  .pkm-card{
+
+    display: flex;
+    flex-direction: column;
+    background-color: #d13b3b;
+    height:40vh;
+    width: 45vw;
+    border: solid #000000;
+    border-width: 3px;
+    border-radius: 0px;
+    text-align: left;
+    color: rgb(255, 255, 255);
+    padding: 0px 5px 0px 2px ;
+    font-size: 8px;
+    margin: 5px 5px 5px 5px;
+    
+  }
+
+  
+    .save-team-box{
+      display: flex;
+      flex-direction: column;
+      background-color: #d13b3b;
+      height:45vh;
+      width: 75vw;
+      border: solid #000000;
+      border-width: 3px;
+      border-radius: 25px;
+      padding: 2%;
+      margin: 10px 5px 25px 35px;
+  
+    }
+  
+
+
+}
+

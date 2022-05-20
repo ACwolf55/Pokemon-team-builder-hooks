@@ -4,9 +4,19 @@ import Pokemon from './Pokemon';
 import './PokemonTeam.css'
 
 
- export default PokemonTeam =()=> {
+ export default function PokemonTeam(props) {
   const [teamName, setTeamName] = useState('')
   const [savedTeam, setSavedTeam] = useState('')
+  const [emptyPkm, setemptyPkm] = useState({
+    pkmName: '',
+    pkmHp: null,
+    pkmAtk: null,
+    pkmDef: null,
+    pkmSpecAtk: null,
+    pkmSpecDef: null,
+    pkmSpeed: null,
+    mountedName: ''
+})
 
     
 
