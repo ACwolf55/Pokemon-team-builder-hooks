@@ -1,10 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios'
 import Pokemon from './Pokemon';
-import './PokemonTeam.css'
+import '../css/PokemonTeam.css'
 
 
- export default function PokemonTeam(props) {
+ function PokemonTeam(props) {
   const [teamName, setTeamName] = useState('')
   const [savedTeam, setSavedTeam] = useState('')
   const [emptyPkm, setemptyPkm] = useState({
@@ -16,23 +16,27 @@ import './PokemonTeam.css'
     pkmSpecDef: null,
     pkmSpeed: null,
     mountedName: ''
-})
+    })
+    const [pkm1, setpkm1] = useState({})
+    const [pkm2, setpkm2] = useState({})
+    const [pkm3, setpkm3] = useState({})
+    const [pkm4, setpkm4] = useState({})
+    const [pkm5, setpkm5] = useState({})
+    const [pkm6, setpkm6] = useState({})
+  
+    
 
+    useEffect(() => {
+    
+    }, [])
     
 
     const saveTeam = () => {
-        const { pokemon } = props.pokemonReducer
-        console.log(pokemon.pokemon_1.pkmName)
+      
 
 
         axios.post('/user/team/', {
-            pokemon_1: pokemon.pokemon_1.pkmName, 
-            pokemon_2: pokemon.pokemon_2.pkmName, 
-            pokemon_3: pokemon.pokemon_3.pkmName, 
-            pokemon_4: pokemon.pokemon_4.pkmName, 
-            pokemon_5: pokemon.pokemon_5.pkmName, 
-            pokemon_6: pokemon.pokemon_6.pkmName, 
-            team_name: teamName
+         pkm1,pkm2,pkm3,pkm4,pkm5,pkm6
         })
             .then(res => {
                 console.log(res.data)
@@ -40,7 +44,7 @@ import './PokemonTeam.css'
                 setSavedTeam(res.data.team_name)
             })
             .catch(err =>  alert(err.response.request.response))
-
+        }
 
 
     const handleTeamName = (value) => {
@@ -49,19 +53,15 @@ import './PokemonTeam.css'
     }
 
     return (
+
         <div className='pokemon-team-box'>
             <div className='pokemon-team'>
-                <Pokemon pokemon={pokemon.pokemon_1 || emptyPkm} pokeSpot={'1'} />
-                <Pokemon pokemon={pokemon.pokemon_2 || emptyPkm}
-                    pokeSpot={'2'} />
-                <Pokemon pokemon={pokemon.pokemon_3 || emptyPkm}
-                    pokeSpot={'3'} />
-                <Pokemon pokemon={pokemon.pokemon_4 || emptyPkm}
-                    pokeSpot={'4'} />
-                <Pokemon pokemon={pokemon.pokemon_5 || emptyPkm}
-                    pokeSpot={'5'} />
-                <Pokemon pokemon={pokemon.pokemon_6 || emptyPkm}
-                    pokeSpot={'6'} />
+            <Pokemon pkm={pkm1} pkmsetter={setpkm1}/>
+            <Pokemon pkm={pkm2} pkmsetter={setpkm2}/>
+            <Pokemon pkm={pkm3} pkmsetter={setpkm3}/>
+            <Pokemon pkm={pkm4} pkmsetter={setpkm4}/>
+            <Pokemon pkm={pkm5} pkmsetter={setpkm5}/>
+            <Pokemon pkm={pkm6} pkmsetter={setpkm6}/>
             </div>
 
             <div className='save-team-box'>
@@ -74,10 +74,6 @@ import './PokemonTeam.css'
     )
 
 
-}
-// function mapStateToProps(reduxState) {
-//     return reduxState
+    }
 
-}
-
-// export default connect(mapStateToProps, {})(PokemonTeam)
+export default PokemonTeam

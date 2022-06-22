@@ -3,7 +3,6 @@
   "version": "0.1.0",
   "private": true,
   "main": "server/index.js",
-  "proxy": "http://localhost:5500",
   "dependencies": {
     "@testing-library/jest-dom": "^5.16.4",
     "@testing-library/react": "^13.1.1",
@@ -21,10 +20,12 @@
     "react-router-dom": "^6.3.0",
     "react-scripts": "5.0.1",
     "redux": "^4.2.0",
+    "redux-devtools-extension": "^2.13.9",
+    "redux-promise-middleware": "^6.1.2",
     "web-vitals": "^2.1.4"
   },
   "scripts": {
-    "go": "react-scripts start",
+    "go": "set PORT=3000 && react-scripts start",
     "start": "node server/index.js && npm build",
     "build": "react-scripts build",
     "test": "react-scripts test",
