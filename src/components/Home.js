@@ -9,7 +9,6 @@ export default function Home (){
             <div className='Home'>
                 {/* <Auth /> */}
                 <div>
-                   <p>yeah</p>
                     <PokemonTeam />
                 </div>
             </div>

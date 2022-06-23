@@ -2,25 +2,19 @@ import React, { useState } from "react";
 import axios from "axios";
 import "../css/Pokemon.css"
 
-const Pokemon = () => {
+const Pokemon = (props) => {
   const [pkmName, setpkmName] = useState("");
   const [pkmSprite, setpkmSprite] = useState("");
-   const [pkmHp, setpkmHp] = useState(null)
-   const [pkmAtk, setpkmAtk] = useState(null)
-   const [pkmDef, setpkmDef] = useState(null)
-   const [pkmSpecAtk, setpkmSpecAtk] = useState(null)
-   const [pkmSpecDef, setpkmSpecDef] = useState(null)
-   const [pkmSpeed,setpkmSpeed] =useState(null)
    const [mountedName, setmountedName] = useState('')
    const [pkmObj,setPkmObj] = useState({})
 
   const getPokemon = (e) => {
     e.preventDefault();
+    console.log(props.pkm)
     axios
       .get(`https://pokeapi.co/api/v2/pokemon/${pkmName.toLowerCase()}`)
       .then((res) => {
-        console.log(res.data);
-        const pkmObj = {
+         props.pkmsetter({
           pkmName: pkmName,
           pkmHp: res.data.stats[0].base_stat,
           pkmAtk: res.data.stats[1].base_stat,
@@ -30,12 +24,10 @@ const Pokemon = () => {
           pkmSpeed: res.data.stats[5].base_stat,
           pkmSprite: res.data.sprites.front_default,
 
-
-
           mountedName: pkmName.toLowerCase(),
-        };
+        });
         setpkmSprite(res.data.sprites.front_default);
-       setPkmObj(pkmObj);
+        setTimeout(()=>console.log(props.pkm), 5000);
       });
   };
 
@@ -66,21 +58,21 @@ const Pokemon = () => {
             <b>{mountedName}</b>
           </h2>
           <div className="pkm-sprite">
-            {!pkmObj.pkmSprite ? null : (
+            {!props.pkm.pkmSprite ? null : (
               <img id="pkm-sprite" src={pkmSprite} />
             )}
           </div>
         </div>
       </div>
-      {pkmObj!== {} ? '' : 
+      {!props.pkm.pkmName ? '' : 
         <div className="pkm-stats">
           <ul>
-            <li>HP: {pkmHp}</li>
-            <li>Attack: {pkmAtk}</li>
-            <li>Defense: {pkmDef}</li>
-            <li>Special Attack: {pkmSpecAtk}</li>
-            <li>Special Defense: {pkmSpecDef}</li>
-            <li>Speed: {pkmSpeed}</li>
+            <li>HP: {props.pkm.pkmHp}</li>
+            <li>Attack: {props.pkm.pkmAtk}</li>
+            <li>Defense: {props.pkm.pkmDef}</li>
+            <li>Special Attack: {props.pkm.pkmSpecAtk}</li>
+            <li>Special Defense: {props.pkm.pkmSpecDef}</li>
+            <li>Speed: {props.pkm.pkmSpeed}</li>
           </ul>
         </div>
       }

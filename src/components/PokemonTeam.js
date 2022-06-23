@@ -27,7 +27,7 @@ import '../css/PokemonTeam.css'
     
 
     useEffect(() => {
-    
+    setTimeout(()=>console.log(pkm1),100)
     }, [])
     
 
