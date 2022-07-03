@@ -7,7 +7,7 @@ export default function Home (){
 
         return (
             <div className='Home'>
-                {/* <Auth /> */}
+                <Auth />
                 <div>
                     <PokemonTeam />
                 </div>
