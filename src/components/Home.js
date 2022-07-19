@@ -1,4 +1,4 @@
-import Auth from './Auth'
+import Nav from './Nav'
 import PokemonTeam from './PokemonTeam'
 
 
@@ -7,7 +7,7 @@ export default function Home (){
 
         return (
             <div className='Home'>
-                <Auth />
+                <Nav/>
                 <div>
                     <PokemonTeam />
                 </div>

@@ -1,6 +1,7 @@
 import Header from './Components/Header';
 import {Route, Routes,Link} from 'react-router-dom'
 import Home from './Components/Home'
+import SavedPokemonTeam from './Components/SavedPokemonTeam';
 import './App.css'
 
 
@@ -11,9 +12,7 @@ function App() {
       <Header/>
     <Routes>
         <Route path='/' element={<Home/>} />
-        {/* <Route path='/Loggedin' element={Loggedin} />
-        <Route path='/AllUserTeams' element={AllUserTeams} />
-        <Route path='/SavedPokemonTeam/:teamid' element={SavedPokemonTeam}/> */}
+        <Route path='/SavedPokemonTeam' element={<SavedPokemonTeam/>}/>
     </Routes>
 
     </div>
