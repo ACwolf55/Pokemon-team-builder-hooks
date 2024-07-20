@@ -2,20 +2,16 @@
   "name": "pkm-team-builder",
   "version": "0.1.0",
   "private": true,
-  "main": "server/index.js",
   "proxy": "http://localhost:5500/",
   "dependencies": {
     "@testing-library/jest-dom": "^5.16.4",
     "@testing-library/react": "^13.1.1",
     "@testing-library/user-event": "^13.5.0",
-    "axios": "^0.27.2",
-    "bcrypt": "^5.0.1",
-    "bcryptjs": "^2.4.3",
-    "dotenv": "^16.0.0",
-    "express": "^4.18.1",
-    "express-session": "^1.17.2",
-    "massive": "^6.10.2",
-    "nodemon": "^2.0.18",
+    "@types/jest": "^29.5.12",
+    "@types/node": "^20.14.11",
+    "@types/react": "^18.3.3",
+    "@types/react-dom": "^18.3.0",
+    "axios": "^1.7.2",
     "react": "^18.1.0",
     "react-dom": "^18.1.0",
     "react-redux": "^8.0.1",
@@ -24,11 +20,11 @@
     "redux": "^4.2.0",
     "redux-devtools-extension": "^2.13.9",
     "redux-promise-middleware": "^6.1.2",
+    "typescript": "^4.9.5",
     "web-vitals": "^2.1.4"
   },
   "scripts": {
-    "go": "set PORT=3000 && react-scripts start",
-    "start": "node server/index.js && npm build",
+    "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
@@ -50,5 +46,10 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "autoprefixer": "^10.4.19",
+    "postcss": "^8.4.39",
+    "tailwindcss": "^3.4.6"
   }
 }
