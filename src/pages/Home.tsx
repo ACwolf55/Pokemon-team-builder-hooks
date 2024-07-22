@@ -6,7 +6,6 @@ import NewPokemonTeam from '../components/NewPokemonTeam'
 const Home = () => {
   return (
     <div className='Home'>
-        <Header/>
         <main>
             <Nav/>
             <NewPokemonTeam/>
