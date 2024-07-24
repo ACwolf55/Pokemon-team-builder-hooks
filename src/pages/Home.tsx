@@ -5,15 +5,11 @@ import NewPokemonTeam from '../components/NewPokemonTeam'
 
 const Home = () => {
   return (
-    <div className='Home'>
-        <main>
-            <Nav/>
-            <NewPokemonTeam/>
+<main className="min-h-screen p-4 flex flex-col lg:flex-row items-center justify-center gap-[8%]">
+    <Nav />
+    <NewPokemonTeam />
+</main>
 
-        </main>
-
-
-    </div>
   )
 }
 

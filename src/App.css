@@ -1,8 +1,8 @@
-.Home{
+.App{
 
-display: flex;
-flex-direction: row;
-background-color: #18262d;
+  background-color: rgb(44, 68, 81);
+
+
   
 }
 
