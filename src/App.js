@@ -1,6 +1,7 @@
 import Header from './components/Header';
 import {Route, Routes,Link} from 'react-router-dom'
 import Home from './pages/Home'
+import { Register } from './pages/Register';
 
 import './App.css'
 
@@ -12,6 +13,9 @@ function App() {
       <Header/>
     <Routes>
         <Route path='/' element={<Home/>} />
+        <Route path='/register' element={<Register/>} />
+        {/* <Route path='/team-list' element={<TeamList/>} />
+        <Route path='/saved-pokemon-team:trainerId' element={<SavedPokemonTeam/>} /> */}
     </Routes>
 
     </div>
