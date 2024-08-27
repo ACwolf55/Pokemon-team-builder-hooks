@@ -1,12 +1,88 @@
-import React from 'react'
+import React, { useState } from 'react';
+import axios from 'axios';
 
 const Nav = () => {
-  return (
-    <nav className="lg:w-[20vw] w-full lg:h-[70vh] h-auto border-4 border-blue-500 rounded-lg p-4">
-    <h3>Nav</h3>
-</nav>
+  const [isRegister, setIsRegister] = useState(false);
+  const [trainerName, setTrainerName] = useState('');
+  const [password, setPassword] = useState('');
+  const [email, setEmail] = useState('');
 
-  )
+  const handleToggle = () => setIsRegister(!isRegister);
+
+  const handleLoginRegister = () => {
+    const data = {
+      trainerName,
+      password,
+      email: isRegister ? email : null,
+    };
+
+    const url = isRegister ? '/register' : '/login';
+
+    axios.post(url, data)
+      .then((res) => {
+        console.log(res.data);
+        alert('Success');
+      })
+      .catch((err) => {
+        console.error(err);
+        alert(`Error: ${err.response.status} - ${err.response.data}`);
+      });
+  };
+
+  return (
+    <nav className={`lg:w-[20vw] w-full lg:h-[70vh] h-auto border-4 p-4 rounded-lg ${isRegister ? 'border-red-500 bg-red-500' : 'border-blue-500'}`}>
+      <h3 className="text-white text-2xl font-bold">{isRegister ? 'Register' : 'Login'}</h3>
+      
+      <input 
+        type="text"
+        className="block w-full mt-2 p-2 rounded"
+        placeholder="Trainer Name"
+        value={trainerName}
+        onChange={(e) => setTrainerName(e.target.value)}
+      />
+      
+      <input 
+        type="password"
+        className="block w-full mt-2 p-2 rounded"
+        placeholder="Password"
+        value={password}
+        onChange={(e) => setPassword(e.target.value)}
+        pattern="^(?!.*\s).{6,}$"
+        title="Password must be at least 6 characters and contain no spaces"
+        required
+      />
+      
+      {isRegister && (
+        <input 
+          type="email"
+          className="block w-full mt-2 p-2 rounded"
+          placeholder="Email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+        />
+      )}
+      
+      <button 
+        className="block w-full mt-4 p-2 bg-green-500 text-white rounded-lg"
+        onClick={handleLoginRegister}
+      >
+        {isRegister ? 'Register' : 'Login'}
+      </button>
+      
+      <div className="flex flex-col justify-center mt-4 space-y-2">
+        <button className="p-2 bg-gray-700 text-white rounded text-sm">Sign in with TikTok</button>
+        <button className="p-2 bg-gray-700 text-white rounded text-sm">Sign in with GitHub</button>
+        <button className="p-2 bg-gray-700 text-white rounded text-sm">Sign in with Gmail</button>
+      </div>
+
+      <button 
+        className="block w-full mt-4 p-2 text-blue-500 underline"
+        onClick={handleToggle}
+      >
+        {isRegister ? 'Switch to Login' : 'Switch to Register'}
+      </button>
+    </nav>
+  );
 }
 
-export default Nav
+export default Nav;
