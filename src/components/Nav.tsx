@@ -9,19 +9,27 @@ const Nav = () => {
 
   const handleToggle = () => setIsRegister(!isRegister);
 
-  const handleLoginRegister = () => {
-    const data = {
-      trainerName,
-      password,
-      email: isRegister ? email : null,
-    };
-
-    const url = isRegister ? '/register' : '/login';
-
-    axios.post(url, data)
+  const handleLogin = () => {
+  
+    axios.post(`http://localhost:8080/login`, {trainerName,password,email})
       .then((res) => {
         console.log(res.data);
-        alert('Success');
+        sessionStorage.setItem("trainerName",res.data.trainerName);
+        sessionStorage.setItem("trainerId",res.data.trainerId);
+        alert(trainerName + "logged in");
+      })
+      .catch((err) => {
+        console.error(err);
+        alert(`Error: ${err.response.status} - ${err.response.data}`);
+      });
+  };
+
+  const handleRegister = () => {
+  
+    axios.post(`http://localhost:8080/register`, {trainerName,password,email})
+      .then((res) => {
+        console.log(res.data);
+        alert(trainerName + "register");
       })
       .catch((err) => {
         console.error(err);
@@ -40,6 +48,7 @@ const Nav = () => {
         value={trainerName}
         onChange={(e) => setTrainerName(e.target.value)}
       />
+      
       
       <input 
         type="password"
@@ -62,17 +71,24 @@ const Nav = () => {
         />
       )}
       
+      {isRegister ? 
+      <button 
+      className="block w-full mt-4 p-2 bg-green-500 text-white rounded-lg"
+      onClick={handleRegister}
+    >Register
+    </button>
+      
+      : 
       <button 
         className="block w-full mt-4 p-2 bg-green-500 text-white rounded-lg"
-        onClick={handleLoginRegister}
-      >
-        {isRegister ? 'Register' : 'Login'}
-      </button>
+        onClick={handleLogin}
+      >Login</button>
+      }
       
       <div className="flex flex-col justify-center mt-4 space-y-2">
-        <button className="p-2 bg-gray-700 text-white rounded text-sm">Sign in with TikTok</button>
+        {/* <button className="p-2 bg-gray-700 text-white rounded text-sm">Sign in with TikTok</button>
         <button className="p-2 bg-gray-700 text-white rounded text-sm">Sign in with GitHub</button>
-        <button className="p-2 bg-gray-700 text-white rounded text-sm">Sign in with Gmail</button>
+        <button className="p-2 bg-gray-700 text-white rounded text-sm">Sign in with Gmail</button> */}
       </div>
 
       <button 

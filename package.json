@@ -2,7 +2,7 @@
   "name": "pkm-team-builder",
   "version": "0.1.0",
   "private": true,
-  "proxy": "http://localhost:5500/",
+  "proxy": "http://localhost:8080/",
   "dependencies": {
     "@testing-library/jest-dom": "^5.16.4",
     "@testing-library/react": "^13.1.1",
@@ -11,7 +11,8 @@
     "@types/node": "^20.14.11",
     "@types/react": "^18.3.3",
     "@types/react-dom": "^18.3.0",
-    "axios": "^1.7.2",
+    "axios": "^1.7.7",
+    "pkm-team-builder": "file:",
     "react": "^18.1.0",
     "react-dom": "^18.1.0",
     "react-redux": "^8.0.1",

@@ -56,7 +56,7 @@ const NewPokemon: FC<NewPokemonProps> = ({ pokemon, setPokemon }) => {
           {!speed && !sprite ? null : (
             <div className="mt-2 w-[255px] h-[133px] overflow-auto flex flex-row justify-around font-['Press_Start_2P'] text-[#d0d7de]">
               <div>
-              <h4 className="underline font-bold">{inputPokemon.charAt(0).toUpperCase() + inputPokemon.slice(1).toLowerCase()}</h4>
+              <h4 className=" font-bold">{inputPokemon.charAt(0).toUpperCase() + inputPokemon.slice(1).toLowerCase()}</h4>
               <img src={sprite} />
               </div>
               <ul className="text-[10px]">
