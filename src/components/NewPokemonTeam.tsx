@@ -1,4 +1,4 @@
-import React,{useState} from 'react'
+import React,{useState,useEffect} from 'react'
 import NewPokemon from './NewPokemon'
 import axios, { AxiosResponse } from 'axios'
 
@@ -20,7 +20,7 @@ const NewPokemonTeam = () => {
         message: string
       }
       
-      axios.post<PokemonTeamResponse>("/pokemon_team")
+      axios.post<PokemonTeamResponse>("http://localhost:8080/save")
         .then((res: AxiosResponse<PokemonTeamResponse>) => {
           console.log(res.data);
           alert("Team saved successfully!");
@@ -43,7 +43,7 @@ const NewPokemonTeam = () => {
             onChange={(e)=>setPokemonTeamName(e.target.value)}
             className="w-1/4 p-2 border-2 border-gray-300 rounded-lg focus:outline-none focus:border-blue-500" 
         />
-        <button className="bg-blue-500 text-white p-2 rounded-lg">Save</button>
+        <button onClick={savePokemonTeam} className="bg-blue-500 text-white p-2 rounded-lg">Save</button>
     </div>
     <div className="flex flex-wrap justify-between">
       <NewPokemon pokemon={pokemon1} setPokemon={setPokemon1} />
