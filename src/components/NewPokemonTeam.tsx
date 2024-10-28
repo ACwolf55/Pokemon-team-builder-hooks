@@ -3,15 +3,19 @@ import NewPokemon from './NewPokemon'
 import axios, { AxiosResponse } from 'axios'
 
 const NewPokemonTeam = () => {
+  const [teamName, setTeamName] = useState('');
   const [pokemon1, setPokemon1] = useState('');
   const [pokemon2, setPokemon2] = useState('');
   const [pokemon3, setPokemon3] = useState('');
   const [pokemon4, setPokemon4] = useState('');
   const [pokemon5, setPokemon5] = useState('');
   const [pokemon6, setPokemon6] = useState('');
-  const [pokemonTeamName, setPokemonTeamName] = useState('');
   const [trainerId, setTrainerId] = useState('');
+  const [sessionTrainerId,setSessionTrainerId] = useState<number | null>(null)
 
+  useEffect(()=>{
+
+  },[])
 
   
   const savePokemonTeam: () => void = () => {
@@ -19,8 +23,14 @@ const NewPokemonTeam = () => {
       interface PokemonTeamResponse {
         message: string
       }
+
+      let trainerId = Number(sessionStorage.getItem("trainerId"));
+
+      const newTeam = {trainerId,teamName,pokemon1,pokemon2,pokemon3,pokemon4,pokemon5,pokemon6}
+
+      console.log(newTeam)
       
-      axios.post<PokemonTeamResponse>("http://localhost:8080/save")
+      axios.post<PokemonTeamResponse>("http://localhost:8080/pokemon-teams/pokemon_team", newTeam )
         .then((res: AxiosResponse<PokemonTeamResponse>) => {
           console.log(res.data);
           alert("Team saved successfully!");
@@ -39,8 +49,8 @@ const NewPokemonTeam = () => {
         <input 
             type="text" 
             placeholder="Team Name" 
-            value={pokemonTeamName}
-            onChange={(e)=>setPokemonTeamName(e.target.value)}
+            value={teamName}
+            onChange={(e)=>setTeamName(e.target.value)}
             className="w-1/4 p-2 border-2 border-gray-300 rounded-lg focus:outline-none focus:border-blue-500" 
         />
         <button onClick={savePokemonTeam} className="bg-blue-500 text-white p-2 rounded-lg">Save</button>

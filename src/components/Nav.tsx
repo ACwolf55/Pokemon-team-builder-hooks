@@ -7,6 +7,7 @@ const Nav: React.FC = () =>{
   const [isRegister, setIsRegister] = useState(false);
   const [sessionTrainerName,setSessionTrainerName] = useState<string | null>(null)
 
+
   useEffect(()=>{
     let user = sessionStorage.getItem("trainerName");
     setSessionTrainerName(user)

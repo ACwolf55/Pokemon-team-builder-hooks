@@ -1,10 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 interface UserNavProps {
     sessionTrainerName: string | null;
   }
+
+
   const UserNav: React.FC<UserNavProps> = ({ sessionTrainerName }) => {
+
+    const navigate = useNavigate()
 
 
   useEffect(()=>{
@@ -13,6 +18,7 @@ interface UserNavProps {
 
   const signOut =()=>{
     sessionStorage.clear();
+    navigate('/')
 
   }
  

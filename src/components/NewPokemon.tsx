@@ -42,7 +42,10 @@ const NewPokemon: FC<NewPokemonProps> = ({ pokemon, setPokemon }) => {
               type="text"
               placeholder="Type Pokémon name!"
               value={inputPokemon}
-              onChange={(e) => setInputPokemon(e.target.value)}
+              onChange={(e) =>{
+                setInputPokemon(e.target.value)
+                setPokemon(e.target.value)}
+              }
               className="p-2 border-2 border-gray-300 rounded-lg focus:outline-none focus:border-blue-500 w-[200px] h-[25px] text-sm"
             />
             <button
