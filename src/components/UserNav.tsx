@@ -25,7 +25,12 @@ interface UserNavProps {
   return (
 <>
     <h3>{sessionTrainerName}</h3>
-    <button onClick={signOut}>sign out</button>
+    <h4 onClick={()=>navigate('/trainer-teams')}
+      className="cursor-pointer hover:text-blue-500"
+      > Saved Teams</h4>
+    <button onClick={signOut}
+    className="cursor-pointer hover:text-blue-500"
+    >sign out</button>
 </>
   );
 }
