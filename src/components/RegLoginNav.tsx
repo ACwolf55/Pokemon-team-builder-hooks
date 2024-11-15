@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 const RegLoginNav = () => {
+  const navigate = useNavigate()
   const [isRegister, setIsRegister] = useState(false);
   const [trainerName, setTrainerName] = useState('');
   const [password, setPassword] = useState('');
@@ -10,13 +12,16 @@ const RegLoginNav = () => {
   const handleToggle = () => setIsRegister(!isRegister);
 
   const handleLogin = () => {
-  
     axios.post(`http://localhost:8080/login`, {trainerName,password,email})
       .then((res) => {
         console.log(res.data);
-        sessionStorage.setItem("trainerName",res.data.trainerName);
+        const capitalizedTrainerName =
+        res.data.trainerName.charAt(0).toUpperCase() + res.data.trainerName.slice(1);
+    
+      sessionStorage.setItem("trainerName", capitalizedTrainerName);
         sessionStorage.setItem("trainerId",res.data.trainerId);
-        alert(trainerName +" " + "logged in");
+        alert(capitalizedTrainerName +" " + "logged in");
+        window.location.reload();
       })
       .catch((err) => {
         console.error(err);
@@ -52,6 +57,7 @@ const RegLoginNav = () => {
         placeholder="Trainer Name"
         value={trainerName}
         onChange={(e) => setTrainerName(e.target.value)}
+
       />
       
       

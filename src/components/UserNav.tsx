@@ -18,8 +18,7 @@ interface UserNavProps {
 
   const signOut =()=>{
     sessionStorage.clear();
-    navigate('/')
-
+    window.location.reload();
   }
  
   return (
