@@ -43,7 +43,7 @@ const NewPokemonTeam = () => {
 
 
   return (
-    <div className="lg:w-[60vw] w-full lg:h-[75vh] h-auto border-4 border-blue-500 rounded-lg p-4">
+    <div className="lg:w-[60vw] w-full lg:h-[90vh] h-auto border-4 border-blue-500 rounded-lg p-4">
     <h2>Make your Pokémon Team!~</h2>
     <div className="flex items-center space-x-2 mb-4">
         <input 

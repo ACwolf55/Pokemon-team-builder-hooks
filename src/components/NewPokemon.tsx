@@ -46,12 +46,14 @@ const NewPokemon: FC<NewPokemonProps> = ({ pokemon, setPokemon }) => {
                 setInputPokemon(e.target.value)
                 setPokemon(e.target.value)}
               }
-              className="p-2 border-2 border-gray-300 rounded-lg focus:outline-none focus:border-blue-500 w-[200px] h-[25px] text-sm"
+              // className="p-2 border-2 border-gray-300 rounded-lg focus:outline-none focus:border-blue-500 w-[200px] h-[25px] text-sm"
+               className="p-1 border-2 border-gray-300 rounded-lg focus:outline-none focus:border-blue-500 w-[150px] h-[20px] text-xs"
             />
             <button
               onClick={getPokemon}
-              className="bg-blue-500 text-white p-1 rounded-lg
-        w-[50px] h-[30px] text-xs"
+        //       className="bg-blue-500 text-white p-1 rounded-lg
+        // w-[50px] h-[30px] text-xs"
+        className="bg-blue-500 text-white p-1 rounded-lg w-[40px] h-[25px] text-[10px]"
             >
               Get!
             </button>
