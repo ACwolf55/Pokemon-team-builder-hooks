@@ -1,9 +1,8 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
+// import { useNavigate } from "react-router-dom";
 
 const RegLoginNav = () => {
-  const navigate = useNavigate();
   const [isRegister, setIsRegister] = useState(false);
   const [trainerName, setTrainerName] = useState("");
   const [password, setPassword] = useState("");

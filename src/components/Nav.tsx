@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
 import RegLoginNav from './RegLoginNav';
 import UserNav from './UserNav';
 
@@ -13,7 +12,6 @@ const Nav: React.FC = () =>{
     setSessionTrainerName(user)
   },[])
 
-  const handleToggle = () => setIsRegister(!isRegister);
 
 
   return (

@@ -1,4 +1,4 @@
-import React, { useState, useEffect, FC } from "react";
+import React, { useState, FC } from "react";
 import axios from "axios";
 
 interface NewPokemonProps {
@@ -8,7 +8,7 @@ interface NewPokemonProps {
 
 const NewPokemon: FC<NewPokemonProps> = ({ pokemon, setPokemon }) => {
   const [inputPokemon, setInputPokemon] = useState("");
-  const [pokemonData, setPokemonData] = useState({});
+  // const [pokemonData, setPokemonData] = useState({});
   const [sprite, setSprite] = useState("");
   const [hp, setHp] = useState(null);
   const [attack, setAttack] = useState(null);
