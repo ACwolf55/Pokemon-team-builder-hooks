@@ -24,13 +24,23 @@ const NewPokemonTeam = () => {
         message: string
       }
 
-      let trainerId = Number(sessionStorage.getItem("trainerId"));
+       let trainerId = Number(sessionStorage.getItem("trainerId"));
+  const token = sessionStorage.getItem("token");  
+
+  if (!token) {
+    alert("You must be logged in to save a team!");
+    return;
+  }
 
       const newTeam = {trainerId,teamName,pokemon1,pokemon2,pokemon3,pokemon4,pokemon5,pokemon6}
 
       console.log(newTeam)
       
-      axios.post<PokemonTeamResponse>("http://localhost:8080/pokemon-teams/pokemon_team", newTeam )
+      axios.post<PokemonTeamResponse>("http://localhost:8080/pokemon-teams/pokemon_team", newTeam,  {
+      headers: {
+        Authorization: `Bearer ${token}` 
+      }
+    } )
         .then((res: AxiosResponse<PokemonTeamResponse>) => {
           console.log(res.data);
           alert("Team saved successfully!");

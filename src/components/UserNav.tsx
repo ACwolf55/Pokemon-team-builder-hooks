@@ -6,7 +6,6 @@ interface UserNavProps {
     sessionTrainerName: string | null;
   }
 
-
   const UserNav: React.FC<UserNavProps> = ({ sessionTrainerName }) => {
 
     const navigate = useNavigate()
