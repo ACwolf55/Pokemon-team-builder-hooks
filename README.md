@@ -1,71 +1,100 @@
-# Getting Started with Create React App
+# Pokémon Team Builder — Spring Boot Server
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+REST API backend for the [Pokémon Team Builder](https://pokemon-team-builder-hooks.vercel.app) full-stack app. Handles user accounts, authentication, and team CRUD. Built in Java with Spring Boot and JWT-based auth.
 
-## Available Scripts
+> **Live frontend:** [pokemon-team-builder-hooks.vercel.app](https://pokemon-team-builder-hooks.vercel.app)
+> **Frontend repo:** [Pokemon-team-builder-hooks](https://github.com/ACwolf55/Pokemon-team-builder-hooks)
 
-In the project directory, you can run:
+## Project History
 
-### `npm start`
+This project started as my bootcamp capstone built with React class components and a Node/Express backend hosted on Heroku.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+I am currently rebuilding it with:
+- React functional components and hooks (modern React patterns)
+- Java + Spring Boot backend (transitioning from Node/Express to deepen enterprise JVM skills)
+- AWS deployment (moving from Heroku to AWS for the backend)
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+The same product surface, but a fundamentally different stack. The migration was a chance to work through Spring Security, JPA, and JWT authentication from scratch while keeping the frontend familiar.
 
-### `npm test`
+## Tech Stack
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+| Layer | Tech |
+|-------|------|
+| Language / Runtime | Java 20 |
+| Framework | Spring Boot 3.2 |
+| Security | Spring Security + JWT (jjwt 0.11.5), BCrypt hashing |
+| Data | Spring Data JPA / Hibernate, PostgreSQL |
+| Build | Maven |
+| Monitoring | Spring Actuator |
 
-### `npm run build`
+## Architecture
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+Standard Spring layered architecture:
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+- **`controller/`** — REST endpoints (`TrainerController`, `PokemonTeamController`)
+- **`service/`** — business logic, transaction boundaries
+- **`repository/`** — JPA repositories (data access)
+- **`entity/`** — JPA entities (`Trainer`, `PokemonTeam`)
+- **`security/`** — JWT filter, JWT utility, password encoding, `SecurityConfig`
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## API Endpoints
 
-### `npm run eject`
+### Authentication (`/auth/**` — public)
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+| Method | Path | Body | Returns |
+|--------|------|------|---------|
+| POST | `/auth/register` | `{ trainerName, password }` | Trainer (201) or 409 conflict |
+| POST | `/auth/login` | `{ trainerName, password }` | `{ token, trainerId, trainerName }` (200) or 401 |
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+### Teams (`/pokemon-teams/**` — JWT required)
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+| Method | Path | Returns |
+|--------|------|---------|
+| POST | `/pokemon-teams/pokemon_team` | Created team |
+| GET | `/pokemon-teams/pokemon_team/team_id/{id}` | Single team |
+| GET | `/pokemon-teams/pokemon_team/{trainer_id}` | All teams for a trainer |
+| DELETE | `/pokemon-teams/pokemon_team/{id}` | Row count affected |
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+Authenticated requests must include `Authorization: Bearer <token>`.
 
-## Learn More
+## Authentication Flow
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+1. Client `POST`s credentials to `/auth/login`.
+2. Server verifies password with BCrypt, generates a JWT signed with the configured secret.
+3. Client stores the token and attaches it to every subsequent request as `Authorization: Bearer <token>`.
+4. `JwtFilter` intercepts each request, validates the token, and populates Spring's `SecurityContext` before reaching protected endpoints.
+5. Sessions are **stateless** — no server-side session storage.
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+## Getting Started
 
-### Code Splitting
+### Prerequisites
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+- Java 20+
+- Maven 3.9+
+- PostgreSQL (or use the H2 in-memory option included for testing)
 
-### Analyzing the Bundle Size
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+### Run
 
-### Making a Progressive Web App
+```bash
+mvn spring-boot:run
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+Server starts on `http://localhost:8080`.
 
-### Advanced Configuration
+## Roadmap
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+- [ ] Add `PUT /pokemon-teams/pokemon_team/{id}` for team editing (currently only create/read/delete)
+- [ ] Deploy to AWS Elastic Beanstalk (in progress)
+- [ ] Profile-based CORS config: `application-dev.properties` (allow all) vs `application-prod.properties` (restrict to Vercel domain)
+- [ ] Refactor `PokemonTeam` entity to use a join table instead of six denormalized columns
+- [ ] Add integration tests
+- [ ] OpenAPI / Swagger docs
 
-### Deployment
+## What I Learned
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
-# Pokemon-team-builder-hooks
+- Spring Security's filter chain and how JWT integration plugs into it
+- Stateless authentication patterns (no `HttpSession`, all state in the token)
+- BCrypt password hashing and why salt matters
+- JPA entity mapping and the trade-offs of denormalized vs. normalized schemas
+- CORS configuration and how to scope it for different environments
