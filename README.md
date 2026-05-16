@@ -1,100 +1,93 @@
-# Pokémon Team Builder — Spring Boot Server
+# Pokémon Team Builder — Frontend
 
-REST API backend for the [Pokémon Team Builder](https://pokemon-team-builder-hooks.vercel.app) full-stack app. Handles user accounts, authentication, and team CRUD. Built in Java with Spring Boot and JWT-based auth.
+React frontend for the [Pokémon Team Builder](https://pokemon-team-builder-hooks.vercel.app) full-stack app. Build a competitive 6-Pokémon team, save it, and view your collection. Built with React hooks, Redux, and Tailwind.
 
-> **Live frontend:** [pokemon-team-builder-hooks.vercel.app](https://pokemon-team-builder-hooks.vercel.app)
-> **Frontend repo:** [Pokemon-team-builder-hooks](https://github.com/ACwolf55/Pokemon-team-builder-hooks)
+> **Live:** [pokemon-team-builder-hooks.vercel.app](https://pokemon-team-builder-hooks.vercel.app)
+> **Backend repo:** [pkm-team-builder-server](https://github.com/ACwolf55/pkm-team-builder-server) (Java + Spring Boot + JWT)
 
 ## Project History
 
-This project started as my bootcamp capstone built with React class components and a Node/Express backend hosted on Heroku.
+Pokémon Team Builder started as my capstone project at **DevMountain bootcamp** — originally built with **React class components**, a Node/Express backend, and deployed to Heroku.
 
-I am currently rebuilding it with:
-- React functional components and hooks (modern React patterns)
-- Java + Spring Boot backend (transitioning from Node/Express to deepen enterprise JVM skills)
-- AWS deployment (moving from Heroku to AWS for the backend)
+After three years teaching full-stack development at DevMountain and completing **Revature's Java / Spring Boot training program**, I'm rebuilding the project from the ground up to reflect what I've learned since:
 
-The same product surface, but a fundamentally different stack. The migration was a chance to work through Spring Security, JPA, and JWT authentication from scratch while keeping the frontend familiar.
+- **Frontend (this repo):** rebuilding in React with **functional components and hooks**, plus TypeScript and Tailwind
+- **Backend:** rebuilt in [Java + Spring Boot](https://github.com/ACwolf55/pkm-team-builder-server) to deepen enterprise/JVM skills
+- **Deployment:** moving from Heroku to AWS Elastic Beanstalk (backend) + Vercel (frontend)
+
+Same product, modern stack.
+
+## What it does
+
+- **Register / log in** — JWT auth against the Spring Boot backend
+- **Browse Pokémon** — data sourced from [PokéAPI](https://pokeapi.co/)
+- **Build a team** — pick 6 Pokémon, name the team
+- **Save teams** — persisted to PostgreSQL via the backend
+- **View your teams** — see all your saved teams with their Pokémon
 
 ## Tech Stack
 
 | Layer | Tech |
-|-------|------|
-| Language / Runtime | Java 20 |
-| Framework | Spring Boot 3.2 |
-| Security | Spring Security + JWT (jjwt 0.11.5), BCrypt hashing |
-| Data | Spring Data JPA / Hibernate, PostgreSQL |
-| Build | Maven |
-| Monitoring | Spring Actuator |
+|---|---|
+| Framework | React 18 (hooks, functional components) |
+| Language | TypeScript |
+| State | Redux + `redux-promise-middleware` (async actions) |
+| Routing | React Router 6 |
+| Styling | Tailwind CSS |
+| HTTP | Axios |
+| External data | PokéAPI |
+| Auth | JWT (issued by backend, stored client-side) |
+| Backend | Spring Boot / Java ([separate repo](https://github.com/ACwolf55/pkm-team-builder-server)) |
+| Hosting | Vercel |
+| Bootstrapped with | Create React App |
 
-## Architecture
+## Project Structure
 
-Standard Spring layered architecture:
+```
+src/
+├── App.js           # root
+├── index.js         # entry
+├── pages/           # route components (home, login, team builder, view teams)
+├── components/      # shared UI
+├── App.css
+├── index.css
+└── tailwind.css
+```
 
-- **`controller/`** — REST endpoints (`TrainerController`, `PokemonTeamController`)
-- **`service/`** — business logic, transaction boundaries
-- **`repository/`** — JPA repositories (data access)
-- **`entity/`** — JPA entities (`Trainer`, `PokemonTeam`)
-- **`security/`** — JWT filter, JWT utility, password encoding, `SecurityConfig`
-
-## API Endpoints
-
-### Authentication (`/auth/**` — public)
-
-| Method | Path | Body | Returns |
-|--------|------|------|---------|
-| POST | `/auth/register` | `{ trainerName, password }` | Trainer (201) or 409 conflict |
-| POST | `/auth/login` | `{ trainerName, password }` | `{ token, trainerId, trainerName }` (200) or 401 |
-
-### Teams (`/pokemon-teams/**` — JWT required)
-
-| Method | Path | Returns |
-|--------|------|---------|
-| POST | `/pokemon-teams/pokemon_team` | Created team |
-| GET | `/pokemon-teams/pokemon_team/team_id/{id}` | Single team |
-| GET | `/pokemon-teams/pokemon_team/{trainer_id}` | All teams for a trainer |
-| DELETE | `/pokemon-teams/pokemon_team/{id}` | Row count affected |
-
-Authenticated requests must include `Authorization: Bearer <token>`.
-
-## Authentication Flow
-
-1. Client `POST`s credentials to `/auth/login`.
-2. Server verifies password with BCrypt, generates a JWT signed with the configured secret.
-3. Client stores the token and attaches it to every subsequent request as `Authorization: Bearer <token>`.
-4. `JwtFilter` intercepts each request, validates the token, and populates Spring's `SecurityContext` before reaching protected endpoints.
-5. Sessions are **stateless** — no server-side session storage.
+The frontend proxies API requests to `http://localhost:8080` in dev so it can hit the Spring Boot backend without CORS friction.
 
 ## Getting Started
 
 ### Prerequisites
-
-- Java 20+
-- Maven 3.9+
-- PostgreSQL (or use the H2 in-memory option included for testing)
-
+- Node.js 18+
+- Backend running locally (see [backend repo](https://github.com/ACwolf55/pkm-team-builder-server)) at `http://localhost:8080`
 
 ### Run
 
 ```bash
-mvn spring-boot:run
+npm install
+npm start
 ```
 
-Server starts on `http://localhost:8080`.
+Opens at `http://localhost:3000`.
 
 ## Roadmap
 
-- [ ] Add `PUT /pokemon-teams/pokemon_team/{id}` for team editing (currently only create/read/delete)
-- [ ] Deploy to AWS Elastic Beanstalk (in progress)
-- [ ] Profile-based CORS config: `application-dev.properties` (allow all) vs `application-prod.properties` (restrict to Vercel domain)
-- [ ] Refactor `PokemonTeam` entity to use a join table instead of six denormalized columns
-- [ ] Add integration tests
-- [ ] OpenAPI / Swagger docs
+- [ ] Edit team feature (waiting on backend PUT endpoint)
+- [ ] Delete team feature
+- [ ] Form validation: prevent empty input submits
+- [ ] Handle page refresh correctly (auth persistence, state recovery)
+- [ ] Mobile responsive polish (Tailwind breakpoints)
+- [ ] Migrate from CRA to Vite (CRA was deprecated in 2024)
+- [ ] Add type filters, abilities, and move sets to the Pokémon browser
 
 ## What I Learned
 
-- Spring Security's filter chain and how JWT integration plugs into it
-- Stateless authentication patterns (no `HttpSession`, all state in the token)
-- BCrypt password hashing and why salt matters
-- JPA entity mapping and the trade-offs of denormalized vs. normalized schemas
-- CORS configuration and how to scope it for different environments
+- Modern React with hooks: `useState`, `useEffect`, custom hooks
+- The difference between class and functional component thinking — from rebuilding the same app twice
+- Redux with `redux-promise-middleware` for clean async API actions
+- TypeScript in React — typing props, state, and API responses
+- Consuming a public REST API (PokéAPI) and reshaping its data for my UI
+- JWT auth flow on the client (storage, attaching to requests, expiry handling)
+- Tailwind utility-first styling vs traditional CSS
+- The bootcamp-grad → working-pro mindset shift: cleaner code, smaller components, hooks for state
