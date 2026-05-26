@@ -29,7 +29,13 @@ const RegLoginNav = () => {
       })
       .catch((err) => {
         console.error(err);
-        alert(`Error: ${err.response.status} - ${err.response.data}`);
+        if (err.response?.status === 401) {
+          alert("Wrong trainer name or password.");
+        } else {
+          alert(
+            `Error: ${err.response?.status || "unknown"} - ${err.response?.data || "something went wrong"}`
+          );
+        }
       });
   };
 
@@ -45,7 +51,13 @@ const RegLoginNav = () => {
       })
       .catch((err) => {
         console.error(err);
-        alert(`Error: ${err.response.status} - ${err.response.data}`);
+        if (err.response?.status === 409) {
+          alert("That trainer name is already taken. Try another.");
+        } else {
+          alert(
+            `Error: ${err.response?.status || "unknown"} - ${err.response?.data || "something went wrong"}`
+          );
+        }
       });
   };
 

@@ -8,20 +8,18 @@ interface NewPokemonProps {
 
 const NewPokemon: FC<NewPokemonProps> = ({ pokemon, setPokemon }) => {
   const [inputPokemon, setInputPokemon] = useState("");
-  // const [pokemonData, setPokemonData] = useState({});
   const [sprite, setSprite] = useState("");
-  const [hp, setHp] = useState(null);
-  const [attack, setAttack] = useState(null);
-  const [defense, setDefense] = useState(null);
-  const [specialAttack, setSpecialAttack] = useState(null);
-  const [specialDefense, setSpecialDefense] = useState(null);
-  const [speed, setSpeed] = useState(null);
+  const [hp, setHp] = useState<number | null>(null);
+  const [attack, setAttack] = useState<number | null>(null);
+  const [defense, setDefense] = useState<number | null>(null);
+  const [specialAttack, setSpecialAttack] = useState<number | null>(null);
+  const [specialDefense, setSpecialDefense] = useState<number | null>(null);
+  const [speed, setSpeed] = useState<number | null>(null);
 
   const getPokemon = () => {
     axios
       .get(`https://pokeapi.co/api/v2/pokemon/${inputPokemon.toLowerCase()}`)
       .then((res) => {
-        console.log(res.data);
         setSprite(res.data.sprites.front_default);
         setHp(res.data.stats[0].base_stat);
         setAttack(res.data.stats[1].base_stat);
@@ -30,51 +28,71 @@ const NewPokemon: FC<NewPokemonProps> = ({ pokemon, setPokemon }) => {
         setSpecialDefense(res.data.stats[4].base_stat);
         setSpeed(res.data.stats[5].base_stat);
       })
-      .catch(() => alert("pokemon not found or server error"));
+      .catch(() => alert("Pokémon not found or server error"));
+  };
+
+  const clearPokemon = () => {
+    setInputPokemon("");
+    setPokemon("");
+    setSprite("");
+    setHp(null);
+    setAttack(null);
+    setDefense(null);
+    setSpecialAttack(null);
+    setSpecialDefense(null);
+    setSpeed(null);
   };
 
   return (
     <div className="w-full sm:w-1/2 lg:w-1/3 p-2">
-      <div className="border-2 border-gray-300 rounded-lg p-4 h-20 lg:h-[9.5rem]">
-        <div className="w-full sm:w-1/2 lg:w-1/3">
-          <div className="flex items-center space-x-2">
-            <input
-              type="text"
-              placeholder="Type Pokémon name!"
-              value={inputPokemon}
-              onChange={(e) =>{
-                setInputPokemon(e.target.value)
-                setPokemon(e.target.value)}
-              }
-              // className="p-2 border-2 border-gray-300 rounded-lg focus:outline-none focus:border-blue-500 w-[200px] h-[25px] text-sm"
-               className="p-1 border-2 border-gray-300 rounded-lg focus:outline-none focus:border-blue-500 w-[150px] h-[20px] text-xs"
-            />
-            <button
-              onClick={getPokemon}
-        //       className="bg-blue-500 text-white p-1 rounded-lg
-        // w-[50px] h-[30px] text-xs"
-        className="bg-blue-500 text-white p-1 rounded-lg w-[40px] h-[25px] text-[10px]"
-            >
-              Get!
-            </button>
-          </div>
-          {!speed && !sprite ? null : (
-            <div className="mt-2 w-[255px] h-[133px] overflow-auto flex flex-row justify-around font-['Press_Start_2P'] text-[#d0d7de]">
-              <div>
-              <h4 className=" font-bold">{inputPokemon.charAt(0).toUpperCase() + inputPokemon.slice(1).toLowerCase()}</h4>
-              <img src={sprite} />
-              </div>
-              <ul className="text-[10px]">
-                <li>HP: {hp}</li>
-                <li>Attack: {attack}</li>
-                <li>Defense: {defense}</li>
-                <li>Special Attack: {specialAttack}</li>
-                <li>Special Defense: {specialDefense}</li>
-                <li>Speed: {speed}</li>
-              </ul>
-            </div>
-          )}
+      <div className="border-2 border-gray-300 rounded-lg p-3 bg-slate-50">
+        <div className="flex items-center gap-2">
+          <input
+            type="text"
+            placeholder="Pokémon name"
+            value={inputPokemon}
+            onChange={(e) => {
+              setInputPokemon(e.target.value);
+              setPokemon(e.target.value);
+            }}
+            className="flex-1 min-w-0 p-1 text-sm border-2 border-gray-300 rounded-md focus:outline-none focus:border-blue-500"
+          />
+          <button
+            onClick={getPokemon}
+            className="shrink-0 bg-blue-500 hover:bg-blue-600 text-white text-xs font-semibold px-2 py-1 rounded-md transition"
+          >
+            Get!
+          </button>
         </div>
+
+        {sprite && (
+          <div className="mt-2 flex items-start gap-3">
+            <div className="text-center">
+              <h4 className="text-xs font-bold capitalize text-gray-800">
+                {inputPokemon}
+              </h4>
+              <img
+                src={sprite}
+                alt={inputPokemon}
+                className="w-16 h-16 mx-auto"
+              />
+              <button
+                onClick={clearPokemon}
+                className="mt-1 text-[10px] shrink-0 text-white text-xs hover:underline bg-red-500 hover:bg-red-600 font-semibold px-2 py-1 rounded-md transition"
+              >
+                Clear
+              </button>
+            </div>
+            <ul className="text-[10px] text-gray-700 leading-tight">
+              <li>HP: {hp}</li>
+              <li>Attack: {attack}</li>
+              <li>Defense: {defense}</li>
+              <li>Sp. Attack: {specialAttack}</li>
+              <li>Sp. Defense: {specialDefense}</li>
+              <li>Speed: {speed}</li>
+            </ul>
+          </div>
+        )}
       </div>
     </div>
   );
