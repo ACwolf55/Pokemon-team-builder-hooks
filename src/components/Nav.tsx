@@ -15,7 +15,7 @@ const Nav: React.FC = () =>{
 
 
   return (
-    <nav className={`lg:w-[20vw] w-full lg:h-[70vh] h-auto border-4 p-4 rounded-lg ${isRegister ? 'border-red-500 bg-red-500' : 'border-blue-500'}`}>
+    <nav className={`w-full max-w-sm lg:max-w-none lg:w-72 border-4 p-4 rounded-lg ${isRegister ? 'border-red-500 bg-red-500' : 'border-blue-500'}`}>
   { sessionTrainerName ? <UserNav sessionTrainerName={sessionTrainerName}/> : <RegLoginNav/>  }
   </nav>
   );

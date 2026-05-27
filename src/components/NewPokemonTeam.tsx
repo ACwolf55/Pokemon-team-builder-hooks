@@ -76,8 +76,10 @@ const NewPokemonTeam = () => {
   };
 
   return (
-    <div className="lg:w-[60vw] w-full lg:h-[90vh] h-auto border-4 border-blue-500 rounded-lg p-4">
-      <h2>Make your Pokémon Team!~</h2>
+    <div className="w-full lg:max-w-4xl border-4 border-blue-500 rounded-lg p-4">
+      <h2 className="text-2xl font-bold text-center text-blue-700 mb-4">
+        Make your Pokémon Team!~
+      </h2>
       <div className="flex items-center space-x-2 mb-4">
         <input
           type="text"
@@ -94,7 +96,7 @@ const NewPokemonTeam = () => {
         </button>
         <button
           onClick={clearAll}
-          className="bg-red-500 hover:bg-red-600 text-gray-800 p-2 rounded-lg"
+          className="bg-red-500 hover:bg-red-600 text-white p-2 rounded-lg"
         >
           Clear All
         </button>

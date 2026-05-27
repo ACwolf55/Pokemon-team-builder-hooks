@@ -53,6 +53,8 @@ const RegLoginNav = () => {
         console.error(err);
         if (err.response?.status === 409) {
           alert("That trainer name is already taken. Try another.");
+        } else if (err.response?.status === 403) {
+          alert("Password must be at least 4 characters.");
         } else {
           alert(
             `Error: ${err.response?.status || "unknown"} - ${err.response?.data || "something went wrong"}`
