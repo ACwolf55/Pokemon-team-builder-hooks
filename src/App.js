@@ -1,7 +1,6 @@
 import Header from './components/Header';
 import {Route, Routes} from 'react-router-dom'
 import Home from './pages/Home'
-import { Register } from './pages/Register';
 import TrainerTeams from './pages/TrainerTeams';
 import SavedPokemonTeam from './pages/SavedPokemonTeam';
 import NotFound from './pages/NotFound';
@@ -16,7 +15,6 @@ function App() {
       <Header/>
     <Routes>
         <Route path='/' element={<Home/>} />
-        <Route path='/register' element={<Register/>} />
         <Route path='/trainer-teams' element={<TrainerTeams/>} />
         <Route path='/trainer-teams/:teamId' element={<SavedPokemonTeam/>} />
         <Route path='*' element={<NotFound/>} />

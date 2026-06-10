@@ -77,7 +77,7 @@ const NewPokemonTeam = () => {
 
   return (
     <div className="w-full lg:max-w-4xl border-4 border-blue-500 rounded-lg p-4">
-      <h2 className="text-2xl font-bold text-center text-blue-700 mb-4">
+      <h2 className="text-2xl font-bold text-center text-white mb-4">
         Make your Pokémon Team!~
       </h2>
       <div className="flex items-center space-x-2 mb-4">
