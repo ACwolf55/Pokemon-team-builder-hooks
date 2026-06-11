@@ -3,7 +3,7 @@ import RegLoginNav from './RegLoginNav';
 import UserNav from './UserNav';
 
 const Nav: React.FC = () =>{
-  const [isRegister, setIsRegister] = useState(false);
+  const [isRegister] = useState(false);
   const [sessionTrainerName,setSessionTrainerName] = useState<string | null>(null)
 
 

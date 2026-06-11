@@ -10,8 +10,6 @@ const NewPokemonTeam = () => {
   const [pokemon4, setPokemon4] = useState("");
   const [pokemon5, setPokemon5] = useState("");
   const [pokemon6, setPokemon6] = useState("");
-  const [trainerId, setTrainerId] = useState("");
-  const [sessionTrainerId, setSessionTrainerId] = useState<number | null>(null);
   const [resetKey, setResetKey] = useState(0);
 
   useEffect(() => {}, []);

@@ -24,7 +24,7 @@ const RegLoginNav = () => {
         sessionStorage.setItem("trainerName", capitalizedTrainerName);
         sessionStorage.setItem("trainerId", res.data.trainerId);
         sessionStorage.setItem("token", res.data.token); 
-        alert(capitalizedTrainerName + " " + "logged in");
+        alert(capitalizedTrainerName + " logged in");
         window.location.reload();
       })
       .catch((err) => {
